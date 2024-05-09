@@ -1,0 +1,9 @@
+services:
+  app:
+    build: ./app
+    ports:
+      - 8080:80
+    tty: true
+    volumes:
+      - .:/go/src
+    command: go run main.go
