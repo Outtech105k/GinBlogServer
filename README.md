@@ -22,4 +22,4 @@ Outtech105
 
 ## License
 
-[MIT License](/README.md) を適用します。
+MIT Licenseを適用します。
