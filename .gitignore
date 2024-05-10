@@ -1,6 +1,2 @@
-<<<<<<< HEAD
 /.env
-/app/templates
-=======
-/.env
->>>>>>> origin/main
+/app/static/*
