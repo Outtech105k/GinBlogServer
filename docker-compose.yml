@@ -6,4 +6,6 @@ services:
     restart: ${RESTART_POLICY}
     volumes:
       - .:/go/src
-    command: go run main.go
+    environment:
+      - GIN_MODE=${SERVER_ENV}
+    command: go run .

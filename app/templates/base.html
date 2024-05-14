@@ -21,11 +21,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
-                <!--
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                    <a class="nav-link" href="/blog">Blogs</a>
                 </li>
-                -->
             </ul>
         </div>
     </nav>
@@ -41,10 +39,9 @@
 
     <!-- Start of page main -->
 
-    <div class="m-2">
-        <h3>Outtech105のホームページ</h3>
-        <p>ブログやWebアプリの掲載を予定しています。現在開発中です。</p>
-    </div>
+    <main class="container">
+        {{template "content" .}}
+    </main>
 
     <!-- End of page main -->
 
