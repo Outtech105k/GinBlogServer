@@ -1,3 +1,7 @@
 .page-color {
     background-color: #0c0f89;
 }
+
+body {
+    font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Noto Sans", Meiryo, sans-serif;
+}

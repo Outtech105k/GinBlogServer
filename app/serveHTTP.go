@@ -8,8 +8,13 @@ import (
 
 func serveHTTP() error {
 	router := gin.Default()
+	var err error
 
-	router.HTMLRender = createPageRender()
+	router.HTMLRender, err = createPageRender()
+	if err != nil {
+		return err
+	}
+
 	router.Static("/static", "./static")
 
 	router.GET("/", func(ctx *gin.Context) {
@@ -28,5 +33,5 @@ func serveHTTP() error {
 		})
 	})
 
-	return router.Run(":80") // return error
+	return router.Run(":80")
 }
