@@ -17,12 +17,12 @@ func createPageRender() (multitemplate.Renderer, error) {
 		"404":             {"base", "customContent", "404"},
 	}
 
-	for index, files := range templateNames {
+	for pageName, files := range templateNames {
 		filePaths, err := genTemplateFilePaths(directries, files)
 		if err != nil {
 			return nil, err
 		}
-		r.AddFromFiles(index, filePaths...)
+		r.AddFromFiles(pageName, filePaths...)
 	}
 
 	return r, nil
@@ -30,12 +30,16 @@ func createPageRender() (multitemplate.Renderer, error) {
 
 func genTemplateFilePaths(directries, fileNames []string) ([]string, error) {
 	if len(directries) < len(fileNames) {
-		return nil, fmt.Errorf("Argument number is `directries` < `fileNames`")
+		return nil, fmt.Errorf("argument number is `directries` < `fileNames`")
 	}
 	paths := make([]string, 0, len(fileNames))
 
 	for i := 0; i < len(fileNames); i++ {
-		paths = append(paths, strings.Join(directries[:i+1], "/")+"/"+fileNames[i]+".html")
+		paths = append(paths, fmt.Sprintf(
+			"%s/%s.html",
+			strings.Join(directries[:i+1], "/"),
+			fileNames[i],
+		))
 	}
 
 	return paths, nil
