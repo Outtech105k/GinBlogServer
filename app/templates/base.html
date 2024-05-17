@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" class="h-100">
 
 <head>
     <meta charset="UTF-8">
@@ -12,7 +12,7 @@
     <link href="/static/css/style.css" rel="stylesheet">
 </head>
 
-<body>
+<body class="h-100 d-flex flex-column">
     <nav class="navbar navbar-expand-sm fixed-top page-color p-2" data-bs-theme="dark">
         <a class="navbar-brand" href="/">Outtechの日常手記</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
@@ -39,13 +39,13 @@
 
     <!-- Start of page main -->
 
-    <main class="container">
+    <main class="container flex-shrink-0">
         {{template "content" .}}
     </main>
 
     <!-- End of page main -->
 
-    <footer class="fixed-bottom text-center text-white page-color">
+    <footer class="align-bottom text-center text-white page-color footer mt-auto py-3">
         <small>&copy; 2024 Outtech105</small>
         <small class="d-none d-sm-inline">All Rights Reserved.</small>
     </footer>

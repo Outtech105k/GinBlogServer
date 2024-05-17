@@ -14,6 +14,7 @@ func createPageRender() (multitemplate.Renderer, error) {
 	templateNames := map[string][]string{
 		"index":           {"base", "topPage"},
 		"blogArticleList": {"base", "customContent", "blogArticleList"},
+		"blogArticle":     {"base", "customContent", "blogArticle"},
 		"404":             {"base", "customContent", "404"},
 	}
 

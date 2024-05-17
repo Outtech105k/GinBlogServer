@@ -8,4 +8,4 @@ services:
       - .:/go/src
     environment:
       - GIN_MODE=${SERVER_ENV}
-    command: go run .
+    command: ${SERV_COMMAND:-go run .}
