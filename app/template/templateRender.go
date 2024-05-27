@@ -1,4 +1,4 @@
-package main
+package template
 
 import (
 	"fmt"
@@ -7,7 +7,7 @@ import (
 	"github.com/gin-contrib/multitemplate"
 )
 
-func createPageRender() (multitemplate.Renderer, error) {
+func CreatePageRender() (multitemplate.Renderer, error) {
 	directries := []string{"templates", "content", "contentBody"}
 	r := multitemplate.NewRenderer()
 
