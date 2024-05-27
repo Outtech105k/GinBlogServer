@@ -1,13 +1,15 @@
 package main
 
 import (
-	"html/template"
+	"context"
 	"log"
 	"net/http"
 	"os"
+	"os/signal"
+	"syscall"
+	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/russross/blackfriday"
 )
 
 func serveHTTP() error {
@@ -31,20 +33,7 @@ func serveHTTP() error {
 	})
 
 	// TODO: 正規ページ化
-	router.GET("/blog/:id", func(ctx *gin.Context) {
-		mdBytes, err := os.ReadFile("./static/md/" + ctx.Param("id") + ".md")
-		if err != nil {
-			ctx.HTML(http.StatusNotFound, "404", nil)
-			log.Print(err)
-			return
-		}
-		html := string(blackfriday.MarkdownCommon(mdBytes))
-
-		ctx.HTML(http.StatusOK, "blogArticle", gin.H{
-			"pageTitle":   "テスト記事",
-			"articleBody": template.HTML(html),
-		})
-	})
+	router.GET("/blog/:id", blogPageHandler)
 
 	// Error response
 	router.NoRoute(func(ctx *gin.Context) {
@@ -53,5 +42,29 @@ func serveHTTP() error {
 		})
 	})
 
-	return router.Run(":80")
+	srv := &http.Server{
+		Addr:    ":80",
+		Handler: router.Handler(),
+	}
+
+	go func() {
+		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			log.Panicf("listen: %s\n", err)
+		}
+	}()
+
+	quit := make(chan os.Signal)
+	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
+	<-quit
+	log.Println("Shutting down server...")
+
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	if err := srv.Shutdown(ctx); err != nil {
+		log.Fatal("Server forced to shutdown:", err)
+	}
+
+	log.Println("Server exiting")
+
+	return nil
 }
