@@ -7,6 +7,6 @@ import (
 func main() {
 	err := serveHTTP()
 	if err != nil {
-		log.Fatal(err)
+		log.Panic(err)
 	}
 }
