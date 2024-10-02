@@ -2,6 +2,8 @@
 
 ## Overview
 
+**開発・運用は無期限休止中です**
+
 Outtech105のブログ投稿サイト用のDockerコンテナです。
 
 ## Usage
